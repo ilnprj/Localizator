@@ -13,8 +13,12 @@ public static class Localizator
 
     public static void Init(Action<bool> onInited)
     {
-        _parseableLocalize = new LocalizeXML(onInited);
-		LocalizationKeys = _parseableLocalize.GetParsedLocalization();
+        //Init parse module.
+        _parseableLocalize = new LocalizeXML();
+        //Get new localization keys.
+        LocalizationKeys = new Dictionary<string, string>();
+        LocalizationKeys = _parseableLocalize.GetParsedLocalization();
+        onInited.Invoke(LocalizationKeys.Count > 0);
     }
 
     private static void LocalizeItem(string key, Action<string> onLocalize)
@@ -23,17 +27,17 @@ public static class Localizator
         {
             onLocalize.Invoke(LocalizationKeys[key]);
         }
-		else
-		{
-			Debug.LogError("Ключ "+key+" не найден в базе.");
-		}
+        else
+        {
+            Debug.LogError("Ключ " + key + " не найден в базе.");
+        }
     }
 
     public static void LocalizeText(string key, Action<string> onLocalize)
     {
         if (Inited)
         {
-            LocalizeItem(key,onLocalize);
+            LocalizeItem(key, onLocalize);
         }
         else
         {
@@ -41,7 +45,7 @@ public static class Localizator
             {
                 if (inited)
                 {
-                    LocalizeText(key,onLocalize);
+                    LocalizeItem(key, onLocalize);
                 }
                 else
                 {
@@ -50,8 +54,8 @@ public static class Localizator
             });
         }
     }
-    
-	public static void SetLanguage(SystemLanguage language)
+
+    public static void SetLanguage(SystemLanguage language)
     {
         switch (language)
         {

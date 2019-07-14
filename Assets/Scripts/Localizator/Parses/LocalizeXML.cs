@@ -13,11 +13,10 @@ public class LocalizeXML : IParseableLocalize
     /// <summary>
     /// Constructor
     /// </summary>
-    public LocalizeXML(Action<bool> onInited)
+    public LocalizeXML()
     {
         //TODO: Тестовый режим. Всегда готово.
         ParsedXML.Add("PLAYEXAMPLE","Play 1001");
-        onInited.Invoke(true);
     }
 
     /// <summary>
