@@ -1,0 +1,16 @@
+<body>
+  <Text>
+    <Line text="Play">
+      <en>Play</en>
+      <ru>Играть</ru>
+      <ja>再生</ja>
+      <de>Spielen</de>
+      <it>Gioca</it>
+      <pt>Jogar</pt>
+      <zh>玩</zh>
+      <es>Jugar</es>
+      <fr>Jouer</fr>
+      <ko>플레이</ko>
+    </Line>
+  </Text>
+</body>

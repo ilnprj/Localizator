@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Статичный класс Локализатор, управляет настройкой языков и связывается с выбранным парсером для получения данных
+/// </summary>
 public static class Localizator
 {
     public static bool Inited;
@@ -53,6 +56,13 @@ public static class Localizator
                 }
             });
         }
+    }
+
+    public static void ChangeLanguage(SystemLanguage language)
+    {
+        SetLanguage(language);
+        //Отправляем сигнал во все текстовые компоненты для смены перевода на новый язык
+        LocalizeHandler.Invoke();
     }
 
     public static void SetLanguage(SystemLanguage language)
