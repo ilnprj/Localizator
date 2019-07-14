@@ -14,7 +14,7 @@ public static class Localizator
     public static void Init(Action<bool> onInited)
     {
         //Init parse module.
-        _parseableLocalize = new LocalizeXML();
+        _parseableLocalize = new LocalizeXML(GetLanguage());
         //Get new localization keys.
         LocalizationKeys = new Dictionary<string, string>();
         LocalizationKeys = _parseableLocalize.GetParsedLocalization();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Xml;
+using System.Xml.Serialization;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ public class LocalizeXML : IParseableLocalize
     /// <summary>
     /// Constructor
     /// </summary>
-    public LocalizeXML()
+    public LocalizeXML(SystemLanguage currentLanguage)
     {
         //TODO: Тестовый режим. Всегда готово.
         ParsedXML.Add("PLAYEXAMPLE","Play 1001");
