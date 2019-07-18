@@ -65,6 +65,15 @@ public static class Localizator
         LocalizeHandler.Invoke();
     }
 
+     public static void ChangeLanguageString(string language)
+    {
+        PlayerPrefs.SetString("CurrentLanguage",language);
+        PlayerPrefs.Save();
+        //Отправляем сигнал во все текстовые компоненты для смены перевода на новый язык
+        LocalizeHandler.Invoke();
+    }
+
+
     public static void SetLanguage(SystemLanguage language)
     {
         switch (language)
@@ -125,6 +134,7 @@ public static class Localizator
                     break;
                 }
         }
+        PlayerPrefs.Save();
     }
 
     public static string GetLanguageString()
@@ -173,7 +183,7 @@ public static class Localizator
 
         var systemLanguage = Application.systemLanguage;
         SetLanguage(systemLanguage);
-        var language = PlayerPrefs.GetString("CurLang");
+        var language = PlayerPrefs.GetString("CurrentLanguage");
         switch (language)
         {
             case "EN":
