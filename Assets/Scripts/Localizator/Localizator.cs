@@ -17,7 +17,7 @@ public static class Localizator
     public static void Init(Action<bool> onInited)
     {
         //Init parse module.
-        _parseableLocalize = new LocalizeXML(GetLanguage());
+        _parseableLocalize = new LocalizeXML(GetLanguageString());
         //Get new localization keys.
         LocalizationKeys = new Dictionary<string, string>();
         LocalizationKeys = _parseableLocalize.GetParsedLocalization();
@@ -125,6 +125,18 @@ public static class Localizator
                     break;
                 }
         }
+    }
+
+    public static string GetLanguageString()
+    {
+        if (PlayerPrefs.HasKey("CurrentLanguage"))
+        {
+            return PlayerPrefs.GetString("CurrentLanguage");
+        }
+
+        var systemLanguage = Application.systemLanguage;
+        SetLanguage(systemLanguage);
+        return PlayerPrefs.GetString("CurrentLanguage");
     }
 
     public static SystemLanguage GetLanguage()

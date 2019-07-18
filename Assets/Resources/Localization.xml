@@ -3,14 +3,17 @@
     <Line text="Play">
       <en>Play</en>
       <ru>Играть</ru>
-      <ja>再生</ja>
-      <de>Spielen</de>
-      <it>Gioca</it>
-      <pt>Jogar</pt>
+      <de>Spiele</de>
       <zh>玩</zh>
-      <es>Jugar</es>
+      <es>Para jugar</es>
       <fr>Jouer</fr>
-      <ko>플레이</ko>
+      <ja>再生</ja>
+      <ko>놀이</ko>
+    </Line>
+
+    <Line text="Example">
+      <en>Example</en>
+      <ru>Пример</ru>
     </Line>
   </Text>
 </body>
