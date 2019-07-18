@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Статичный класс Локализатор, управляет настройкой языков и связывается с выбранным парсером для получения данных
+/// </summary>
 public static class Localizator
 {
     public static bool Inited;
@@ -14,7 +17,7 @@ public static class Localizator
     public static void Init(Action<bool> onInited)
     {
         //Init parse module.
-        _parseableLocalize = new LocalizeXML();
+        _parseableLocalize = new LocalizeXML(GetLanguageString());
         //Get new localization keys.
         LocalizationKeys = new Dictionary<string, string>();
         LocalizationKeys = _parseableLocalize.GetParsedLocalization();
@@ -53,6 +56,13 @@ public static class Localizator
                 }
             });
         }
+    }
+
+    public static void ChangeLanguage(SystemLanguage language)
+    {
+        SetLanguage(language);
+        //Отправляем сигнал во все текстовые компоненты для смены перевода на новый язык
+        LocalizeHandler.Invoke();
     }
 
     public static void SetLanguage(SystemLanguage language)
@@ -115,6 +125,18 @@ public static class Localizator
                     break;
                 }
         }
+    }
+
+    public static string GetLanguageString()
+    {
+        if (PlayerPrefs.HasKey("CurrentLanguage"))
+        {
+            return PlayerPrefs.GetString("CurrentLanguage");
+        }
+
+        var systemLanguage = Application.systemLanguage;
+        SetLanguage(systemLanguage);
+        return PlayerPrefs.GetString("CurrentLanguage");
     }
 
     public static SystemLanguage GetLanguage()
