@@ -463,6 +463,7 @@ GameObject:
   - component: {fileID: 169352510}
   - component: {fileID: 169352509}
   - component: {fileID: 169352508}
+  - component: {fileID: 169352511}
   m_Layer: 5
   m_Name: Dropdown
   m_TagString: Untagged
@@ -540,15 +541,15 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: RU
+    - m_Text: ru
       m_Image: {fileID: 0}
-    - m_Text: EN
+    - m_Text: en
       m_Image: {fileID: 0}
-    - m_Text: FR
+    - m_Text: fr
       m_Image: {fileID: 0}
-    - m_Text: DE
+    - m_Text: de
       m_Image: {fileID: 0}
-    - m_Text: JP
+    - m_Text: jp
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -593,6 +594,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 169352506}
   m_CullTransparentMesh: 0
+--- !u!114 &169352511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169352506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 097ebb249b82ada4f96dae9036094db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &770799821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,7 +1111,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: RU
+  m_Text: ru
 --- !u!222 &1223451714
 CanvasRenderer:
   m_ObjectHideFlags: 0
