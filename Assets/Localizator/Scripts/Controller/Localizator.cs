@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Статичный класс Локализатор, управляет настройкой языков и связывается с выбранным парсером для получения данных
+/// Main static class Localizator. 
+/// Saves and loads the selected language and uses third-party parsers
 /// </summary>
 public static class Localizator
 {
@@ -14,6 +15,10 @@ public static class Localizator
     public static Dictionary<string, string> LocalizationKeys = new Dictionary<string, string>();
     private static IParseableLocalize _parseableLocalize;
 
+    /// <summary>
+    /// Initialize Localizator
+    /// </summary>
+    /// <param name="onInited"></param>
     public static void Init(Action<bool> onInited)
     {
         //Init parse module.
@@ -24,7 +29,7 @@ public static class Localizator
         onInited.Invoke(LocalizationKeys.Count > 0);
     }
 
-    private static void LocalizeItem(string key, Action<string> onLocalize)
+    private static void TryLocalize(string key, Action<string> onLocalize)
     {
         if (LocalizationKeys.ContainsKey(key))
         {
@@ -36,11 +41,16 @@ public static class Localizator
         }
     }
 
+    /// <summary>
+    /// Localizing Text Components in UserInterface through Action Model
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="onLocalize"></param>
     public static void LocalizeText(string key, Action<string> onLocalize)
     {
         if (Inited)
         {
-            LocalizeItem(key, onLocalize);
+            TryLocalize(key, onLocalize);
         }
         else
         {
@@ -48,7 +58,7 @@ public static class Localizator
             {
                 if (inited)
                 {
-                    LocalizeItem(key, onLocalize);
+                    TryLocalize(key, onLocalize);
                 }
                 else
                 {
@@ -58,6 +68,10 @@ public static class Localizator
         }
     }
 
+    /// <summary>
+    /// Change Language through SystemLanguage 
+    /// </summary>
+    /// <param name="language"></param>
     public static void ChangeLanguage(SystemLanguage language)
     {
         SetLanguage(language);
@@ -65,15 +79,23 @@ public static class Localizator
         LocalizeHandler.Invoke();
     }
 
-     public static void ChangeLanguageString(string language)
+    /// <summary>
+    /// Change Language through string "Language"
+    /// </summary>
+    /// <param name="language"></param>
+    public static void ChangeLanguageString(string language)
     {
-        PlayerPrefs.SetString("CurrentLanguage",language);
+        PlayerPrefs.SetString("CurrentLanguage", language);
         PlayerPrefs.Save();
         //Отправляем сигнал во все текстовые компоненты для смены перевода на новый язык
         LocalizeHandler.Invoke();
     }
 
 
+    /// <summary>
+    /// Set new language without auto update text components
+    /// </summary>
+    /// <param name="language"></param>
     public static void SetLanguage(SystemLanguage language)
     {
         switch (language)
@@ -137,6 +159,10 @@ public static class Localizator
         PlayerPrefs.Save();
     }
 
+    /// <summary>
+    /// Get Current Language through Player Prefs
+    /// </summary>
+    /// <returns></returns>
     public static string GetLanguageString()
     {
         if (PlayerPrefs.HasKey("CurrentLanguage"))
@@ -149,6 +175,10 @@ public static class Localizator
         return PlayerPrefs.GetString("CurrentLanguage");
     }
 
+    /// <summary>
+    /// Get Current Language through SystemLanguage
+    /// </summary>
+    /// <returns></returns>
     public static SystemLanguage GetLanguage()
     {
         if (PlayerPrefs.HasKey("CurrentLanguage"))
