@@ -11,9 +11,9 @@ public static class Localizator
     public static bool Inited;
     public static SystemLanguage CurrentLanguage;
     public static Action LocalizeHandler = delegate { };
-
     public static Dictionary<string, string> LocalizationKeys = new Dictionary<string, string>();
-    private static IParseableLocalize _parseableLocalize;
+    public static IParseableLocalize ParseableLocalize;
+    public static bool InitedParseType;
 
     /// <summary>
     /// Initialize Localizator
@@ -21,13 +21,16 @@ public static class Localizator
     /// <param name="onInited"></param>
     public static void Init(Action<bool> onInited)
     {
-        //Init parse module.
-        _parseableLocalize = new LocalizeJSON(GetLanguageString());
+        //Init parse module if this interface not set in SwitchTypeParser
+        if (!InitedParseType)
+            ParseableLocalize = new LocalizeXML(GetLanguageString());
+
+
         //Get new localization keys.
         LocalizationKeys = new Dictionary<string, string>();
-        LocalizationKeys = _parseableLocalize.GetParsedLocalization();
+        LocalizationKeys = ParseableLocalize.GetParsedLocalization();
         //Localizator init only if Dictionary is not empty
-        onInited.Invoke( LocalizationKeys.Count > 0);
+        onInited.Invoke(LocalizationKeys.Count > 0);
     }
 
     private static void TryLocalize(string key, Action<string> onLocalize)
