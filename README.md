@@ -1,5 +1,5 @@
 ## Localizator
-**Simple Localizator** (works with XML, JSON files)
+**Simple Localizator** for Unity3D (works with XML, JSON files)
 
 #### Features
 - **Localizator.cs**
