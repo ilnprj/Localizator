@@ -26,6 +26,7 @@ public static class Localizator
         //Get new localization keys.
         LocalizationKeys = new Dictionary<string, string>();
         LocalizationKeys = _parseableLocalize.GetParsedLocalization();
+        //Localizator init only if Dictionary is not empty
         onInited.Invoke(LocalizationKeys.Count > 0);
     }
 
@@ -102,57 +103,57 @@ public static class Localizator
         {
             case SystemLanguage.English:
                 {
-                    PlayerPrefs.SetString("CurrentLanguage", "EN");
+                    PlayerPrefs.SetString("CurrentLanguage", "en");
                     break;
                 }
             case SystemLanguage.Russian:
                 {
-                    PlayerPrefs.SetString("CurrentLanguage", "RU");
+                    PlayerPrefs.SetString("CurrentLanguage", "ru");
                     break;
                 }
             case SystemLanguage.French:
                 {
-                    PlayerPrefs.SetString("CurrentLanguage", "FR");
+                    PlayerPrefs.SetString("CurrentLanguage", "fr");
                     break;
                 }
             case SystemLanguage.German:
                 {
-                    PlayerPrefs.SetString("CurrentLanguage", "DE");
+                    PlayerPrefs.SetString("CurrentLanguage", "de");
                     break;
                 }
             case SystemLanguage.Italian:
                 {
-                    PlayerPrefs.SetString("CurrentLanguage", "IT");
+                    PlayerPrefs.SetString("CurrentLanguage", "it");
                     break;
                 }
             case SystemLanguage.Spanish:
                 {
-                    PlayerPrefs.SetString("CurrentLanguage", "ES");
+                    PlayerPrefs.SetString("CurrentLanguage", "es");
                     break;
                 }
             case SystemLanguage.Portuguese:
                 {
-                    PlayerPrefs.SetString("CurrentLanguage", "IT");
+                    PlayerPrefs.SetString("CurrentLanguage", "pt");
                     break;
                 }
             case SystemLanguage.Chinese:
                 {
-                    PlayerPrefs.SetString("CurrentLanguage", "ZH");
+                    PlayerPrefs.SetString("CurrentLanguage", "ch");
                     break;
                 }
             case SystemLanguage.Korean:
                 {
-                    PlayerPrefs.SetString("CurrentLanguage", "KO");
+                    PlayerPrefs.SetString("CurrentLanguage", "ko");
                     break;
                 }
             case SystemLanguage.Japanese:
                 {
-                    PlayerPrefs.SetString("CurrentLanguage", "JP");
+                    PlayerPrefs.SetString("CurrentLanguage", "jp");
                     break;
                 }
             default:
                 {
-                    PlayerPrefs.SetString("CurrentLanguage", "EN");
+                    PlayerPrefs.SetString("CurrentLanguage", "en");
                     break;
                 }
         }
@@ -184,57 +185,38 @@ public static class Localizator
         if (PlayerPrefs.HasKey("CurrentLanguage"))
         {
             var loadedLang = PlayerPrefs.GetString("CurrentLanguage");
-            switch (loadedLang)
-            {
-                case "EN":
-                    { return SystemLanguage.English; }
-                case "RU":
-                    { return SystemLanguage.Russian; }
-                case "FR":
-                    { return SystemLanguage.French; }
-                case "DE":
-                    { return SystemLanguage.German; }
-                case "IT":
-                    { return SystemLanguage.Italian; }
-                case "ES":
-                    { return SystemLanguage.Spanish; }
-                case "PT":
-                    { return SystemLanguage.Portuguese; }
-                case "ZH":
-                    { return SystemLanguage.Chinese; }
-                case "KO":
-                    { return SystemLanguage.Korean; }
-                case "JP":
-                    { return SystemLanguage.Japanese; }
-                default:
-                    { return SystemLanguage.English; }
-            }
+            return GetSystemLanguage(loadedLang);
         }
 
         var systemLanguage = Application.systemLanguage;
         SetLanguage(systemLanguage);
         var language = PlayerPrefs.GetString("CurrentLanguage");
-        switch (language)
+        return GetSystemLanguage(language);
+    }
+
+    private static SystemLanguage GetSystemLanguage(string lang)
+    {
+        switch (lang)
         {
-            case "EN":
+            case "en":
                 { return SystemLanguage.English; }
-            case "RU":
+            case "ru":
                 { return SystemLanguage.Russian; }
-            case "FR":
+            case "fr":
                 { return SystemLanguage.French; }
-            case "DE":
+            case "de":
                 { return SystemLanguage.German; }
-            case "IT":
+            case "it":
                 { return SystemLanguage.Italian; }
-            case "ES":
+            case "es":
                 { return SystemLanguage.Spanish; }
-            case "PT":
+            case "pt":
                 { return SystemLanguage.Portuguese; }
-            case "ZH":
+            case "ch":
                 { return SystemLanguage.Chinese; }
-            case "KO":
+            case "ko":
                 { return SystemLanguage.Korean; }
-            case "JP":
+            case "jp":
                 { return SystemLanguage.Japanese; }
             default:
                 { return SystemLanguage.English; }

@@ -14,7 +14,6 @@ public class LocalizeXML : IParseableLocalize
 
     public LocalizeXML(string currentLanguage)
     {
-        //TODO: Тестовый режим. Всегда готово.
         LoadXmlFromFile(currentLanguage);
     }
 
@@ -32,7 +31,7 @@ public class LocalizeXML : IParseableLocalize
         try
         {
             TextAsset textFromFile = Resources.Load<TextAsset>(PATH);
-            ParseXml(textFromFile.text,lang);
+            ParseXml(textFromFile.text, lang);
         }
         catch (Exception e)
         {
@@ -48,34 +47,33 @@ public class LocalizeXML : IParseableLocalize
         xmlDoc.Load(new StringReader(inputText));
         XmlNodeList ListTexts = xmlDoc.GetElementsByTagName("Line");
 
-        try {
-        foreach (XmlNode item in ListTexts)
+        try
         {
-            //Add Key for Localize
-            keyLocalize = item.Attributes[0].InnerText;
-            string guaranteedValue = item.ChildNodes[0].InnerText;
-            string prevLocValue = valueLocalized;
-
-            foreach (XmlNode subItem in item.ChildNodes)
+            foreach (XmlNode item in ListTexts)
             {
-                if (subItem.LocalName == lang)
+                //Add Key for Localize
+                keyLocalize = item.Attributes[0].InnerText;
+                string guaranteedValue = item.ChildNodes[0].InnerText;
+                string prevLocValue = valueLocalized;
+
+                foreach (XmlNode subItem in item.ChildNodes)
                 {
-                    //Add Value current Key for Localize
-                    valueLocalized = subItem.InnerText;
+                    if (subItem.LocalName == lang)
+                    {
+                        //Add Value current Key for Localize
+                        valueLocalized = subItem.InnerText;
+                    }
+                }
+
+                if (valueLocalized != prevLocValue)
+                {
+                    ParsedXML.Add(keyLocalize, valueLocalized);
+                }
+                else
+                {
+                    ParsedXML.Add(keyLocalize, guaranteedValue);
                 }
             }
-
-            if (valueLocalized!=prevLocValue)
-            {
-                ParsedXML.Add(keyLocalize,valueLocalized);
-            }
-            else
-            {
-                ParsedXML.Add(keyLocalize,guaranteedValue);
-            }
-
-            
-        }
         }
         catch (Exception e)
         {
