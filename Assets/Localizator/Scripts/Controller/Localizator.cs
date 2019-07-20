@@ -27,7 +27,7 @@ public static class Localizator
         LocalizationKeys = new Dictionary<string, string>();
         LocalizationKeys = _parseableLocalize.GetParsedLocalization();
         //Localizator init only if Dictionary is not empty
-        onInited.Invoke(LocalizationKeys.Count > 0);
+        onInited.Invoke( LocalizationKeys.Count > 0);
     }
 
     private static void TryLocalize(string key, Action<string> onLocalize)

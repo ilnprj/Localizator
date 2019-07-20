@@ -30,6 +30,7 @@ public class LocalizeXML : IParseableLocalize
     {
         try
         {
+            ParsedLocalization = new Dictionary<string, string>();
             TextAsset textFromFile = Resources.Load<TextAsset>(PATH);
             ParseXml(textFromFile.text, lang);
         }
@@ -46,7 +47,6 @@ public class LocalizeXML : IParseableLocalize
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(new StringReader(inputText));
         XmlNodeList ListTexts = xmlDoc.GetElementsByTagName("Line");
-
         try
         {
             foreach (XmlNode item in ListTexts)
