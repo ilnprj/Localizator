@@ -5,5 +5,6 @@
 /// </summary>
 public interface IParseableLocalize
 {
+    Dictionary<string,string> ParsedLocalization { get; set;}
     Dictionary<string,string>GetParsedLocalization();
 }

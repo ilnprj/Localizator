@@ -7,8 +7,14 @@ using UnityEngine;
 /// </summary>
 public class LocalizeJSON : IParseableLocalize
 {
+    public Dictionary<string, string> ParsedLocalization { get; set; }
     public Dictionary<string, string> GetParsedLocalization()
     {
-        throw new System.NotImplementedException();
+        return ParsedLocalization;
+    }
+
+    public LocalizeJSON(string currentLanguage)
+    {
+
     }
 }

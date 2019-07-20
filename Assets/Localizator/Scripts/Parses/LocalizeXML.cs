@@ -10,7 +10,7 @@ using System.IO;
 public class LocalizeXML : IParseableLocalize
 {
     private const string PATH = "LocXML";
-    public Dictionary<string, string> ParsedXML = new Dictionary<string, string>();
+    public Dictionary<string, string> ParsedLocalization { get; set;}
 
     public LocalizeXML(string currentLanguage)
     {
@@ -23,7 +23,7 @@ public class LocalizeXML : IParseableLocalize
     /// <returns></returns>
     public Dictionary<string, string> GetParsedLocalization()
     {
-        return ParsedXML;
+        return ParsedLocalization;
     }
 
     private void LoadXmlFromFile(string lang)
@@ -67,11 +67,11 @@ public class LocalizeXML : IParseableLocalize
 
                 if (valueLocalized != prevLocValue)
                 {
-                    ParsedXML.Add(keyLocalize, valueLocalized);
+                    ParsedLocalization.Add(keyLocalize, valueLocalized);
                 }
                 else
                 {
-                    ParsedXML.Add(keyLocalize, guaranteedValue);
+                    ParsedLocalization.Add(keyLocalize, guaranteedValue);
                 }
             }
         }
