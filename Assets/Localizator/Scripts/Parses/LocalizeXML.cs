@@ -5,11 +5,11 @@ using System;
 using System.IO;
 
 /// <summary>
-/// XML парсер, достающий из файлов локализации нужные параметры
+/// XML parser that takes the necessary parameters from the localization files
 /// </summary>
 public class LocalizeXML : IParseableLocalize
 {
-    private const string PATH = "Localization";
+    private const string PATH = "LocXML";
     public Dictionary<string, string> ParsedXML = new Dictionary<string, string>();
 
     public LocalizeXML(string currentLanguage)

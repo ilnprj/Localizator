@@ -1,0 +1,31 @@
+{
+   "Text": [
+      {
+         "@text": "Play",
+         "en": "Play",
+         "ru": "Играть",
+         "de": "Spiele",
+         "ch": "玩",
+         "es": "Para jugar",
+         "fr": "Jouer",
+         "jp": "再生",
+         "ko": "놀이"
+      },
+      {
+         "@text": "Example",
+         "en": "Example",
+         "ru": "Пример"
+      },
+      {
+         "@text": "SelectLang",
+         "en": "Select Language",
+         "ru": "Выберите Язык",
+         "de": "Sprache wählen",
+         "ch": "选择语言",
+         "es": "Elegir idioma",
+         "fr": "Choisissez la langue",
+         "jp": "言語を選択",
+         "ko": "언어 선택"
+      }
+   ]
+}
