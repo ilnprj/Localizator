@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 /// <summary>
-/// Компонент локализации текста. 
+/// Component for text. Send key to Localizator and get localized value.
 /// </summary>
 [RequireComponent(typeof(Text))]
 public class GetLocalizeText : MonoBehaviour
