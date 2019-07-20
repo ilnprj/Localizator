@@ -1,0 +1,23 @@
+{
+   "Play": [
+     {
+       "key": "Play",
+       "ru": "Играть",
+       "en": "Play"
+     }
+   ],
+   "Example": [
+     {
+       "key": "Example",
+       "ru": "Пример",
+       "en": "Example"
+     }
+   ],
+   "SelectLang": [
+      {
+        "key": "SelectLang",
+        "ru": "Выберите Язык",
+        "en": "Select Language"
+      }
+    ]
+ }

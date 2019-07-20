@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -541,15 +541,23 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: ru
-      m_Image: {fileID: 0}
     - m_Text: en
+      m_Image: {fileID: 0}
+    - m_Text: ru
       m_Image: {fileID: 0}
     - m_Text: fr
       m_Image: {fileID: 0}
     - m_Text: de
       m_Image: {fileID: 0}
+    - m_Text: it
+      m_Image: {fileID: 0}
+    - m_Text: es
+      m_Image: {fileID: 0}
     - m_Text: jp
+      m_Image: {fileID: 0}
+    - m_Text: ch
+      m_Image: {fileID: 0}
+    - m_Text: ko
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1111,7 +1119,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ru
+  m_Text: en
 --- !u!222 &1223451714
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1295,7 +1303,7 @@ GameObject:
   - component: {fileID: 1566700539}
   - component: {fileID: 1566700541}
   m_Layer: 5
-  m_Name: ExampleLocText
+  m_Name: ExampleText_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1642,13 +1650,14 @@ GameObject:
   - component: {fileID: 1878389361}
   - component: {fileID: 1878389363}
   - component: {fileID: 1878389362}
+  - component: {fileID: 1878389364}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1878389361
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1663,10 +1672,10 @@ RectTransform:
   m_Father: {fileID: 143781906}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 338.6503, y: 55.199997}
-  m_SizeDelta: {x: 160, y: 54.5}
+  m_AnchorMin: {x: 0.95600003, y: 0.558}
+  m_AnchorMax: {x: 0.95600003, y: 0.669}
+  m_AnchoredPosition: {x: -79.76999, y: 0.19999695}
+  m_SizeDelta: {x: 160, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1878389362
 MonoBehaviour:
@@ -1701,7 +1710,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Select Lang
+  m_Text: SelectLang
 --- !u!222 &1878389363
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1710,6 +1719,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1878389360}
   m_CullTransparentMesh: 0
+--- !u!114 &1878389364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878389360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f18bfd1fb9f43b443ba6cb55e645884e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2049946486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1723,7 +1744,7 @@ GameObject:
   - component: {fileID: 2049946489}
   - component: {fileID: 2049946488}
   m_Layer: 5
-  m_Name: ExampleLocText _2
+  m_Name: ExampleText_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

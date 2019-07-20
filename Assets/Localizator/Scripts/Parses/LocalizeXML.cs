@@ -5,16 +5,15 @@ using System;
 using System.IO;
 
 /// <summary>
-/// XML парсер, достающий из файлов локализации нужные параметры
+/// XML parser that takes the necessary parameters from the localization files
 /// </summary>
 public class LocalizeXML : IParseableLocalize
 {
-    private const string PATH = "Localization";
-    public Dictionary<string, string> ParsedXML = new Dictionary<string, string>();
+    private const string PATH = "LocXML";
+    public Dictionary<string, string> ParsedLocalization { get; set;} = new Dictionary<string, string>();
 
     public LocalizeXML(string currentLanguage)
     {
-        //TODO: Тестовый режим. Всегда готово.
         LoadXmlFromFile(currentLanguage);
     }
 
@@ -24,7 +23,7 @@ public class LocalizeXML : IParseableLocalize
     /// <returns></returns>
     public Dictionary<string, string> GetParsedLocalization()
     {
-        return ParsedXML;
+        return ParsedLocalization;
     }
 
     private void LoadXmlFromFile(string lang)
@@ -32,7 +31,7 @@ public class LocalizeXML : IParseableLocalize
         try
         {
             TextAsset textFromFile = Resources.Load<TextAsset>(PATH);
-            ParseXml(textFromFile.text,lang);
+            ParseXml(textFromFile.text, lang);
         }
         catch (Exception e)
         {
@@ -47,35 +46,33 @@ public class LocalizeXML : IParseableLocalize
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(new StringReader(inputText));
         XmlNodeList ListTexts = xmlDoc.GetElementsByTagName("Line");
-
-        try {
-        foreach (XmlNode item in ListTexts)
+        try
         {
-            //Add Key for Localize
-            keyLocalize = item.Attributes[0].InnerText;
-            string guaranteedValue = item.ChildNodes[0].InnerText;
-            string prevLocValue = valueLocalized;
-
-            foreach (XmlNode subItem in item.ChildNodes)
+            foreach (XmlNode item in ListTexts)
             {
-                if (subItem.LocalName == lang)
+                //Add Key for Localize
+                keyLocalize = item.Attributes[0].InnerText;
+                string guaranteedValue = item.ChildNodes[0].InnerText;
+                string prevLocValue = valueLocalized;
+
+                foreach (XmlNode subItem in item.ChildNodes)
                 {
-                    //Add Value current Key for Localize
-                    valueLocalized = subItem.InnerText;
+                    if (subItem.LocalName == lang)
+                    {
+                        //Add Value current Key for Localize
+                        valueLocalized = subItem.InnerText;
+                    }
+                }
+
+                if (valueLocalized != prevLocValue)
+                {
+                    ParsedLocalization.Add(keyLocalize, valueLocalized);
+                }
+                else
+                {
+                    ParsedLocalization.Add(keyLocalize, guaranteedValue);
                 }
             }
-
-            if (valueLocalized!=prevLocValue)
-            {
-                ParsedXML.Add(keyLocalize,valueLocalized);
-            }
-            else
-            {
-                ParsedXML.Add(keyLocalize,guaranteedValue);
-            }
-
-            
-        }
         }
         catch (Exception e)
         {
