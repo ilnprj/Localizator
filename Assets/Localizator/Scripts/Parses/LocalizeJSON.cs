@@ -9,7 +9,7 @@ using System;
 public class LocalizeJSON : IParseableLocalize
 {
     public const string PATH = "LocJSON";
-    public Dictionary<string, string> ParsedLocalization { get; set; }
+    public Dictionary<string, string> ParsedLocalization { get; set; } = new Dictionary<string, string>();
     public Dictionary<string, string> GetParsedLocalization()
     {
         return ParsedLocalization;
@@ -33,6 +33,9 @@ public class LocalizeJSON : IParseableLocalize
                 Debug.LogError(e.Message);
                 value = allLocalizations[i][0][0].ToString();
             }
+            //FIXME: For some reason JSON get string value with quotes
+            key = key.Replace("\"",string.Empty);
+            value = value.Replace("\"",string.Empty);
             ParsedLocalization.Add(key, value);
         }
     }
