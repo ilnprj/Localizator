@@ -13,7 +13,12 @@ public static class Localizator
     public static Action LocalizeHandler = delegate { };
     public static Dictionary<string, string> LocalizationKeys = new Dictionary<string, string>();
     public static IParseableLocalize ParseableLocalize;
-    public static bool InitedParseType;
+
+    /// <summary>
+    /// In default type parse set in XML
+    /// </summary>
+    public static IParseableLocalize CurrentTypeParse = new LocalizeXML();
+
 
     /// <summary>
     /// Initialize Localizator
@@ -21,11 +26,8 @@ public static class Localizator
     /// <param name="onInited"></param>
     public static void Init(Action<bool> onInited)
     {
-        //Init parse module if this interface not set in SwitchTypeParser
-        if (!InitedParseType)
-            ParseableLocalize = new LocalizeXML(GetLanguageString());
-
-
+        ParseableLocalize = CurrentTypeParse;
+        ParseableLocalize.InitParseModule(GetLanguageString());
         //Get new localization keys.
         LocalizationKeys = new Dictionary<string, string>();
         LocalizationKeys = ParseableLocalize.GetParsedLocalization();
@@ -41,7 +43,7 @@ public static class Localizator
         }
         else
         {
-            Debug.LogError("Ключ " + key + " не найден в базе.");
+            Debug.LogError("Key " + key + " is not found in Dictionary.");
         }
     }
 
@@ -66,7 +68,7 @@ public static class Localizator
                 }
                 else
                 {
-                    Debug.LogError("Ошибка инициализации localizator");
+                    Debug.LogError("Error initialize localizator");
                 }
             });
         }

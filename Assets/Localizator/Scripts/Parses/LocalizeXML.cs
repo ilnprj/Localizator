@@ -10,15 +10,15 @@ using System.IO;
 public class LocalizeXML : IParseableLocalize
 {
     private const string PATH = "LocXML";
-    public Dictionary<string, string> ParsedLocalization { get; set;} = new Dictionary<string, string>();
+    public Dictionary<string, string> ParsedLocalization { get; set;}
 
-    public LocalizeXML(string currentLanguage)
+    public void InitParseModule(string currentLanguage)
     {
         LoadXmlFromFile(currentLanguage);
     }
 
     /// <summary>
-    /// Возвращает готовый словарь с переведенными словами.
+    /// Returns Dictionary with key/value of localization from XML file
     /// </summary>
     /// <returns></returns>
     public Dictionary<string, string> GetParsedLocalization()
@@ -30,6 +30,7 @@ public class LocalizeXML : IParseableLocalize
     {
         try
         {
+            ParsedLocalization = new Dictionary<string, string>();
             TextAsset textFromFile = Resources.Load<TextAsset>(PATH);
             ParseXml(textFromFile.text, lang);
         }

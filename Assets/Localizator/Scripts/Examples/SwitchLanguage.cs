@@ -9,7 +9,7 @@ public class SwitchLanguage : MonoBehaviour
 {
     private Dropdown _dropDownElement;
 
-    private void Awake()
+    private void Start()
     {
         _dropDownElement = GetComponent<Dropdown>();
         _dropDownElement.onValueChanged.AddListener( delegate {

@@ -15,8 +15,9 @@ public class LocalizeJSON : IParseableLocalize
         return ParsedLocalization;
     }
 
-    public LocalizeJSON(string currentLanguage)
+    public void InitParseModule(string currentLanguage)
     {
+        ParsedLocalization = new Dictionary<string, string>();
         TextAsset data = Resources.Load<TextAsset>(PATH);
         var allLocalizations = JSON.Parse(data.text);
         string key = " ";
@@ -24,14 +25,15 @@ public class LocalizeJSON : IParseableLocalize
         for (int i = 0; i < allLocalizations.Count; i++)
         {
             key = allLocalizations[i][0]["key"].ToString();
-            try
+            if (!string.Equals(allLocalizations[i][0][currentLanguage].ToString(),"null"))
             {
                 value = allLocalizations[i][0][currentLanguage].ToString();
+                Debug.LogError(value);
             }
-            catch(Exception e)
+            else
             {
-                Debug.LogError(e.Message);
-                value = allLocalizations[i][0][0].ToString();
+                //1 - is the index first default lang in JSON file
+                value = allLocalizations[i][0][1].ToString();
             }
             //FIXME: For some reason JSON get string value with quotes
             key = key.Replace("\"",string.Empty);

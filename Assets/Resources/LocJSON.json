@@ -2,22 +2,22 @@
    "Play": [
      {
        "key": "Play",
-       "ru": "Играть",
-       "en": "Play"
+       "en": "Play",
+       "ru": "Играть"
      }
    ],
    "Example": [
      {
        "key": "Example",
-       "ru": "Пример",
-       "en": "Example"
+       "en": "Example",
+       "ru": "Пример"
      }
    ],
    "SelectLang": [
       {
         "key": "SelectLang",
-        "ru": "Выберите Язык",
-        "en": "Select Language"
+        "en": "Select Language",
+        "ru": "Выберите Язык"
       }
     ]
  }
