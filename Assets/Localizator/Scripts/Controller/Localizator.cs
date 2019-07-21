@@ -14,31 +14,28 @@
         public static SystemLanguage CurrentLanguage;
         public static Action LocalizeHandler = delegate { };
         public static Dictionary<string, string> LocalizationKeys = new Dictionary<string, string>();
-        /// <summary>
-        /// In default type parse set in XML
-        /// </summary>
-        public static IParseableLocalize CurrentTypeParse = new LocalizeXML();
-        /// <summary>
-        /// Class that provides Select Lang
-        /// </summary>
-        /// <returns></returns>
+        public static List<string> AvailableLanguages = new List<string>();
+        public static IParseableLocalize CurrentTypeParse = new LocalizeJSON();
         public static ILocale Locale = new LocaleLanguage();
         private static IParseableLocalize parseableLocalize;
-
-
-        /// <summary>
-        /// Initialize Localizator
-        /// </summary>
-        /// <param name="onInited"></param>
+        
         public static void Init(Action<bool> onInited)
         {
             parseableLocalize = CurrentTypeParse;
             parseableLocalize.InitParseModule(Locale.GetLanguageId());
-            //Get new localization keys.
-            LocalizationKeys = new Dictionary<string, string>();
-            LocalizationKeys = parseableLocalize.GetParsedLocalization();
-            //Localizator init only if Dictionary is not empty
-            onInited.Invoke(LocalizationKeys.Count > 0);
+            try
+            {
+                LocalizationKeys = new Dictionary<string, string>();
+                LocalizationKeys = parseableLocalize.ParsedLocalization;
+                AvailableLanguages = new List<string>();
+                AvailableLanguages = parseableLocalize.AvailableLanguages;
+                onInited.Invoke(Inited = true);
+            }
+            catch
+            {
+                onInited.Invoke(Inited = false);
+                Debug.LogError("Failed Init Localizator");
+            }
         }
 
         private static void TryLocalize(string key, Action<string> onLocalize)
@@ -66,9 +63,9 @@
             }
             else
             {
-                Init((inited) =>
+                Init((Inited) =>
                 {
-                    if (inited)
+                    if (Inited)
                     {
                         TryLocalize(key, onLocalize);
                     }
@@ -81,24 +78,13 @@
         }
 
         /// <summary>
-        /// Change Language through SystemLanguage 
-        /// </summary>
-        /// <param name="language"></param>
-        public static void ChangeLanguage(SystemLanguage language)
-        {
-            Locale.SetLanguage(language);
-            //Send event to all GetLocalizeText components for updating localization
-            LocalizeHandler.Invoke();
-        }
-
-        /// <summary>
         /// Change Language through string "Language"
         /// </summary>
         /// <param name="language"></param>
         public static void ChangeLanguage(string language)
         {
+            Inited = false;
             Locale.SetLanguage(language);
-            //Send event to all GetLocalizeText components for updating localization
             LocalizeHandler.Invoke();
         }
     }

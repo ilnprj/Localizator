@@ -6,11 +6,10 @@
     /// </summary>
     public interface IParseableLocalize
     {
+        List<string> AvailableLanguages {get; set;}
         Dictionary<string, string> ParsedLocalization { get; set; }
 
         void InitParseModule(string currentLanguage);
-
-        Dictionary<string, string> GetParsedLocalization();
     }
 }
 

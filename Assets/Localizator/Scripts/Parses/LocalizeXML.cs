@@ -13,6 +13,7 @@
     {
         private const string PATH = "LocXML";
         public Dictionary<string, string> ParsedLocalization { get; set; }
+        public List<string> AvailableLanguages { get; set; }
 
         public void InitParseModule(string currentLanguage)
         {
@@ -48,10 +49,11 @@
             string valueLocalized = " ";
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(new StringReader(inputText));
-            XmlNodeList ListTexts = xmlDoc.GetElementsByTagName("Line");
+            XmlNodeList listTexts = xmlDoc.GetElementsByTagName("Line");
+            XmlNodeList languages = xmlDoc.GetElementsByTagName("Languages");
             try
             {
-                foreach (XmlNode item in ListTexts)
+                foreach (XmlNode item in listTexts)
                 {
                     //Add Key for Localize
                     keyLocalize = item.Attributes[0].InnerText;
