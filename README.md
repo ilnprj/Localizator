@@ -13,7 +13,8 @@
 - **LocalizeJSON.cs**
   - Parser that takes localization keys from an json file. This parser works on [SimpleJSON](https://github.com/Bunny83/SimpleJSON).
 - **SwitchTypeParser**
-  - Developer may be set type Parsing in this script. ***Also this script must be set on another scene or must be activated before first call GetLocalizeText script***.
+  - Developer may be set type Parsing in this script. 
+  - The script can be located in the same scene as the Localizator calls. So in the scene before, for example "Loading" scene.
 
 
 #### Type of Localization files:
