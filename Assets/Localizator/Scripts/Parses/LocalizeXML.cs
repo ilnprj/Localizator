@@ -80,7 +80,6 @@
             {
                 foreach (XmlNode item in listTexts)
                 {
-                    //Add Key for Localize
                     keyLocalize = item.Attributes[0].InnerText;
                     string guaranteedValue = item.ChildNodes[0].InnerText;
                     string prevLocValue = valueLocalized;
@@ -89,7 +88,6 @@
                     {
                         if (subItem.LocalName == lang)
                         {
-                            //Add Value current Key for Localize
                             valueLocalized = subItem.InnerText;
                         }
                     }
@@ -106,8 +104,7 @@
             }
             catch (Exception e)
             {
-                Debug.LogError("Incorrect format XML Localization. Maybe missing key or value.");
-                Debug.LogError(e.Message);
+                Debug.LogError("Incorrect format XML Localization. Maybe missing key or value."+e.Message);
             }
         }
     }

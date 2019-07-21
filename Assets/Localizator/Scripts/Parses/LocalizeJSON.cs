@@ -41,7 +41,9 @@
 
             foreach (var item in langs)
             {
-                AvailableLanguages.Add(item.Value.ToString());
+                string result = item.Value.ToString();
+                result = deleteQuotes(result);
+                AvailableLanguages.Add(result);
             }
 
             string key = " ";
@@ -50,7 +52,6 @@
             for (int i = 0; i < localizations.Count; i++)
             {
                 key = localizations[i][0]["key"].ToString();
-                Debug.LogError("KEY = "+key);
                 if (!string.Equals(localizations[i][0][currentLanguage].ToString(), "null"))
                 {
                     value = localizations[i][0][currentLanguage].ToString();
@@ -59,10 +60,15 @@
                 {
                     value = localizations[i][0][1].ToString();
                 }
-                key = key.Replace("\"", string.Empty);
-                value = value.Replace("\"", string.Empty);
+                key = deleteQuotes(key);
+                value = deleteQuotes(value);
                 ParsedLocalization.Add(key, value);
             }
+        }
+
+        private string deleteQuotes(string input)
+        {
+            return input.Replace("\"", string.Empty);
         }
     }
 }

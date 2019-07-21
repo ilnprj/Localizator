@@ -540,25 +540,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: en
-      m_Image: {fileID: 0}
-    - m_Text: ru
-      m_Image: {fileID: 0}
-    - m_Text: fr
-      m_Image: {fileID: 0}
-    - m_Text: de
-      m_Image: {fileID: 0}
-    - m_Text: it
-      m_Image: {fileID: 0}
-    - m_Text: es
-      m_Image: {fileID: 0}
-    - m_Text: jp
-      m_Image: {fileID: 0}
-    - m_Text: ch
-      m_Image: {fileID: 0}
-    - m_Text: ko
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1163,7 +1145,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: en
+  m_Text: 
 --- !u!222 &1223451714
 CanvasRenderer:
   m_ObjectHideFlags: 0
