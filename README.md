@@ -23,8 +23,8 @@
 
 
 #### Type of Localization files:
-- [Example JSON file](https://gitlab.com/ilnpj/localizator/blob/develop/Assets/Resources/LocJSON.json)
-- [Example XML file](https://gitlab.com/ilnpj/localizator/blob/develop/Assets/Resources/LocXML.xml)
+- [Example JSON file](https://gitlab.com/ilnprj/localizator/blob/develop/Assets/Resources/LocJSON.json)
+- [Example XML file](https://gitlab.com/ilnprj/localizator/blob/develop/Assets/Resources/LocXML.xml)
 
 #### How to get started?
 1.  Set Localization file with all keys and values and put it to Resources folder on your Unity project.
