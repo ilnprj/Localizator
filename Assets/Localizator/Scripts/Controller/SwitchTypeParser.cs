@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-
+using System;
 /// <summary>
 /// This script switch type parsing in Localizator.
 /// If this script not set in scene - Localizator set default type Parse automatically.
-/// WARNING. This script must be activated before first call component "GetLocalizeText". For example in scene "Loading"
 /// </summary>
 public class SwitchTypeParser : MonoBehaviour
 {
@@ -24,16 +23,17 @@ public class SwitchTypeParser : MonoBehaviour
         {
             case TypeParser.JSON:
                 {
-                    Localizator.ParseableLocalize = new LocalizeJSON(Localizator.GetLanguageString());
+                    Localizator.CurrentTypeParse = new LocalizeJSON();
                     break;
                 }
 
             case TypeParser.XML:
                 {
-                    Localizator.ParseableLocalize = new LocalizeXML(Localizator.GetLanguageString());
+                    Localizator.ParseableLocalize = new LocalizeXML();
                     break;
                 }
         }
-        Localizator.InitedParseType=true;
+        Action<bool> onInit = delegate {};
+        Localizator.Init(onInit);
     }
 }
