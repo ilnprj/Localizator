@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using LocalizatorSystem;
+using System.Collections.Generic;
 
 /// <summary>
 /// Swtich Language in Runtime with UI.Dropdown
@@ -8,7 +10,7 @@ using UnityEngine.UI;
 public class SwitchLanguage : MonoBehaviour
 {
     private Dropdown _dropDownElement;
-
+    private List<string> languages = new List<string>();
     private void Start()
     {
         _dropDownElement = GetComponent<Dropdown>();
@@ -16,35 +18,31 @@ public class SwitchLanguage : MonoBehaviour
             SetNewLanguage(_dropDownElement);
         });
 
-        SetLangInDrop();
+        LoadAvailableLangs();
+        SetCurLangInDrop();
+    }
+
+    private void LoadAvailableLangs()
+    {
+        languages = Localizator.AvailableLanguages;
+        _dropDownElement.AddOptions(languages);
+ 
     }
 
     private void SetNewLanguage(Dropdown changed)
     {
-        Localizator.ChangeLanguageString(changed.options[changed.value].text);
+        Localizator.ChangeLanguage(changed.options[changed.value].text);
     }
 
-    private void SetLangInDrop()
+    private void SetCurLangInDrop()
     {
-        _dropDownElement.SetValueWithoutNotify(CurLangAdapter());
+        _dropDownElement.SetValueWithoutNotify(GetNumCurrentLang());
     }
 
-    private int CurLangAdapter()
+    private int GetNumCurrentLang()
     {
-        string lang = Localizator.GetLanguageString();
-
-        switch (lang)
-        {
-            case "en": return 0;
-            case "ru": return 1;
-            case "fr": return 2;
-            case "de": return 3;
-            case "it": return 4;
-            case "es": return 5;
-            case "jp": return 6;
-            case "ch": return 7;
-            case "ko": return 8;
-            default: return 0;
-        }
+        string lang = Localizator.Locale.GetLanguageId();
+        return languages.FindIndex(value => value==lang);
     }
+
 }

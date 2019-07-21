@@ -1,55 +1,74 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using SimpleJSON;
-using System;
-
-/// <summary>
-/// JSON parser that takes the necessary parameters from the localization files
-/// </summary>
-public class LocalizeJSON : IParseableLocalize
+﻿namespace LocalizatorSystem
 {
-    public const string PATH = "LocJSON";
-    public Dictionary<string, string> ParsedLocalization { get; set; } = new Dictionary<string, string>();
-    public Dictionary<string, string> GetParsedLocalization()
+    using System.Collections.Generic;
+    using UnityEngine;
+    using SimpleJSON;
+    using System;
+    
+    /// <summary>
+    /// JSON parser that takes the necessary parameters from the localization files
+    /// </summary>
+    public class LocalizeJSON : IParseableLocalize
     {
-        return ParsedLocalization;
-    }
+        public const string PATH = "LocJSON";
 
-    public void InitParseModule(string currentLanguage)
-    {
-        ParsedLocalization = new Dictionary<string, string>();
-        TextAsset data;
-
-        try {
-            data = Resources.Load<TextAsset>(PATH);
-        }
-        catch(Exception e)
+        public List<string> AvailableLanguages {get;set;}
+        public Dictionary<string, string> ParsedLocalization { get; set; } = new Dictionary<string, string>();
+        public Dictionary<string, string> GetParsedLocalization()
         {
-            Debug.LogError("File "+PATH+".json is not found in folder Resources!");
-            Debug.LogError(e.Message);
-            return;
+            return ParsedLocalization;
         }
 
-        var allLocalizations = JSON.Parse(data.text);
-        string key = " ";
-        string value = " ";
-        for (int i = 0; i < allLocalizations.Count; i++)
+        public void InitParseModule(string currentLanguage)
         {
-            key = allLocalizations[i][0]["key"].ToString();
-            if (!string.Equals(allLocalizations[i][0][currentLanguage].ToString(),"null"))
+            ParsedLocalization = new Dictionary<string, string>();
+            AvailableLanguages = new List<string>();
+            TextAsset data;
+
+            try
             {
-                value = allLocalizations[i][0][currentLanguage].ToString();
-                Debug.LogError(value);
+                data = Resources.Load<TextAsset>(PATH);
             }
-            else
+            catch (Exception e)
             {
-                //1 - is the index first default lang in JSON file
-                value = allLocalizations[i][0][1].ToString();
+                Debug.LogError("File " + PATH + ".json is not found in folder Resources!\n"+e.Message);
+                return;
             }
-            //FIXME: For some reason JSON get string value with quotes
-            key = key.Replace("\"",string.Empty);
-            value = value.Replace("\"",string.Empty);
-            ParsedLocalization.Add(key, value);
+
+            var jSON = JSON.Parse(data.text);
+            var langs  = jSON["Languages"];
+            var localizations = jSON["Localizations"];
+
+            foreach (var item in langs)
+            {
+                string result = item.Value.ToString();
+                result = deleteQuotes(result);
+                AvailableLanguages.Add(result);
+            }
+
+            string key = " ";
+            string value = " ";
+            
+            for (int i = 0; i < localizations.Count; i++)
+            {
+                key = localizations[i][0]["key"].ToString();
+                if (!string.Equals(localizations[i][0][currentLanguage].ToString(), "null"))
+                {
+                    value = localizations[i][0][currentLanguage].ToString();
+                }
+                else
+                {
+                    value = localizations[i][0][1].ToString();
+                }
+                key = deleteQuotes(key);
+                value = deleteQuotes(value);
+                ParsedLocalization.Add(key, value);
+            }
+        }
+
+        private string deleteQuotes(string input)
+        {
+            return input.Replace("\"", string.Empty);
         }
     }
 }

@@ -1,5 +1,15 @@
 <body>
   <Text>
+    <Languages>
+      <en>en</en> 
+      <ru>ru</ru> 
+      <de>de</de> 
+      <fr>fr</fr> 
+      <ch>ch</ch> 
+      <es>es</es> 
+      <jp>jp</jp>
+      <ko>ko</ko>
+    </Languages>
     <Line text="Play">
       <en>Play</en>
       <ru>Играть</ru>
