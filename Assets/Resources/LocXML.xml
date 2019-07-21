@@ -1,0 +1,30 @@
+<body>
+  <Text>
+    <Line text="Play">
+      <en>Play</en>
+      <ru>Играть</ru>
+      <de>Spiele</de>
+      <ch>玩</ch>
+      <es>Para jugar</es>
+      <fr>Jouer</fr>
+      <jp>再生</jp>
+      <ko>놀이</ko>
+    </Line>
+
+    <Line text="Example">
+      <en>Example</en>
+      <ru>Пример</ru>
+    </Line>
+
+    <Line text="SelectLang">
+      <en>Select Language</en>
+      <ru>Выберите Язык</ru>
+      <de>Sprache wählen</de>
+      <ch>选择语言</ch>
+      <es>Elegir idioma</es>
+      <fr>Choisissez la langue</fr>
+      <jp>言語を選択</jp>
+      <ko>언어 선택</ko>
+    </Line>
+  </Text>
+</body>
