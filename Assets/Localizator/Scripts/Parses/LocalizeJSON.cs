@@ -18,7 +18,18 @@ public class LocalizeJSON : IParseableLocalize
     public void InitParseModule(string currentLanguage)
     {
         ParsedLocalization = new Dictionary<string, string>();
-        TextAsset data = Resources.Load<TextAsset>(PATH);
+        TextAsset data;
+
+        try {
+            data = Resources.Load<TextAsset>(PATH);
+        }
+        catch(Exception e)
+        {
+            Debug.LogError("File "+PATH+".json is not found in folder Resources!");
+            Debug.LogError(e.Message);
+            return;
+        }
+
         var allLocalizations = JSON.Parse(data.text);
         string key = " ";
         string value = " ";
