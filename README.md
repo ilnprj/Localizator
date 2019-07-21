@@ -16,6 +16,10 @@
 - **SwitchTypeParser**
   - Developer may be set type Parsing in this script. 
   - The script can be located in the same scene as the Localizator calls. So in the scene before, for example "Loading" scene.
+  - Script sets autofill UI.Dropdown, which fill all available languages. Also Dropdown component auto sets in current lang. 
+  - Add loading available languages in Localizator from files .xml, json.
+- **Locale**
+  - Scripts that provides all load and save parameters to Language (Prefs) 
 
 
 #### Type of Localization files:
