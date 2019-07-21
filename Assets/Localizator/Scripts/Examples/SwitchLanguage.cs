@@ -21,7 +21,7 @@ public class SwitchLanguage : MonoBehaviour
 
     private void SetNewLanguage(Dropdown changed)
     {
-        Localizator.ChangeLanguageString(changed.options[changed.value].text);
+        Localizator.ChangeLanguage(changed.options[changed.value].text);
     }
 
     private void SetLangInDrop()
@@ -31,7 +31,7 @@ public class SwitchLanguage : MonoBehaviour
 
     private int CurLangAdapter()
     {
-        string lang = Localizator.GetLanguageString();
+        string lang = Localizator.Locale.GetLanguageId();
 
         switch (lang)
         {

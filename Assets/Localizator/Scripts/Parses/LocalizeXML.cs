@@ -1,11 +1,11 @@
-﻿using System.Xml;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using System.IO;
-
-namespace LocalizatorSystem
+﻿namespace LocalizatorSystem
 {
+    using System.Xml;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using System;
+    using System.IO;
+
     /// <summary>
     /// XML parser that takes the necessary parameters from the localization files
     /// </summary>

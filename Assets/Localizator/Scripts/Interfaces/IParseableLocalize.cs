@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace LocalizatorSystem
+﻿namespace LocalizatorSystem
 {
+    using System.Collections.Generic;
     /// <summary>
     /// Interface that using in Localizator class
     /// </summary>

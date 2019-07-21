@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using SimpleJSON;
-using System;
-
-namespace LocalizatorSystem
+﻿namespace LocalizatorSystem
 {
+    using System.Collections.Generic;
+    using UnityEngine;
+    using SimpleJSON;
+    using System;
+    
     /// <summary>
     /// JSON parser that takes the necessary parameters from the localization files
     /// </summary>

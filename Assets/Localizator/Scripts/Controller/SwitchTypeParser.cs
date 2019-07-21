@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System;
-
-namespace LocalizatorSystem
+﻿namespace LocalizatorSystem
 {
+    using UnityEngine;
+    using System;
+    
     /// <summary>
     /// This script switch type parsing in Localizator.
     /// If this script not set in scene - Localizator set default type Parse automatically.
@@ -32,7 +32,7 @@ namespace LocalizatorSystem
 
                 case TypeParser.XML:
                     {
-                        Localizator.ParseableLocalize = new LocalizeXML();
+                        Localizator.CurrentTypeParse = new LocalizeXML();
                         break;
                     }
             }
