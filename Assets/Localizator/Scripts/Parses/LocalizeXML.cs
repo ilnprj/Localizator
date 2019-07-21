@@ -45,12 +45,37 @@
 
         private void ParseXml(string inputText, string lang)
         {
-            string keyLocalize;
-            string valueLocalized = " ";
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(new StringReader(inputText));
-            XmlNodeList listTexts = xmlDoc.GetElementsByTagName("Line");
-            XmlNodeList languages = xmlDoc.GetElementsByTagName("Languages");
+            SetAvailableLangs(xmlDoc);
+            SetLocalization(xmlDoc, lang);
+        }
+
+        private void SetAvailableLangs(XmlDocument xml)
+        {
+            try
+            {
+                XmlNodeList languages = xml.GetElementsByTagName("Languages");
+                AvailableLanguages = new List<string>();
+                foreach (XmlNode nodeItem in languages)
+                {
+                    foreach (XmlNode item in nodeItem)
+                    {
+                        AvailableLanguages.Add(item.InnerText);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Error get available languages. Check XML file!\n"+e.Message);
+            }
+        }
+
+        private void SetLocalization(XmlDocument xml, string lang)
+        {
+            XmlNodeList listTexts = xml.GetElementsByTagName("Line");
+            string keyLocalize;
+            string valueLocalized = " ";
             try
             {
                 foreach (XmlNode item in listTexts)
@@ -86,5 +111,4 @@
             }
         }
     }
-
 }

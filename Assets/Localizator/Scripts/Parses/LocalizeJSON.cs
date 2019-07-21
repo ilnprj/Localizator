@@ -24,15 +24,14 @@
             ParsedLocalization = new Dictionary<string, string>();
             AvailableLanguages = new List<string>();
             TextAsset data;
-            Debug.LogError("INIT");
+
             try
             {
                 data = Resources.Load<TextAsset>(PATH);
             }
             catch (Exception e)
             {
-                Debug.LogError("File " + PATH + ".json is not found in folder Resources!");
-                Debug.LogError(e.Message);
+                Debug.LogError("File " + PATH + ".json is not found in folder Resources!\n"+e.Message);
                 return;
             }
 
