@@ -1,39 +1,44 @@
 ﻿using UnityEngine;
 using System;
-/// <summary>
-/// This script switch type parsing in Localizator.
-/// If this script not set in scene - Localizator set default type Parse automatically.
-/// </summary>
-public class SwitchTypeParser : MonoBehaviour
+
+namespace LocalizatorSystem
 {
-    public enum TypeParser
+    /// <summary>
+    /// This script switch type parsing in Localizator.
+    /// If this script not set in scene - Localizator set default type Parse automatically.
+    /// </summary>
+    public class SwitchTypeParser : MonoBehaviour
     {
-        XML, JSON
-    }
-
-    public TypeParser Parser = TypeParser.XML;
-    private void Awake()
-    {
-        SetTypeParser();
-    }
-
-    private void SetTypeParser()
-    {
-        switch (Parser)
+        public enum TypeParser
         {
-            case TypeParser.JSON:
-                {
-                    Localizator.CurrentTypeParse = new LocalizeJSON();
-                    break;
-                }
-
-            case TypeParser.XML:
-                {
-                    Localizator.ParseableLocalize = new LocalizeXML();
-                    break;
-                }
+            XML, JSON
         }
-        Action<bool> onInit = delegate {};
-        Localizator.Init(onInit);
+
+        public TypeParser Parser = TypeParser.XML;
+        private void Awake()
+        {
+            SetTypeParser();
+        }
+
+        private void SetTypeParser()
+        {
+            switch (Parser)
+            {
+                case TypeParser.JSON:
+                    {
+                        Localizator.CurrentTypeParse = new LocalizeJSON();
+                        break;
+                    }
+
+                case TypeParser.XML:
+                    {
+                        Localizator.ParseableLocalize = new LocalizeXML();
+                        break;
+                    }
+            }
+            Action<bool> onInit = delegate { };
+            Localizator.Init(onInit);
+        }
     }
+
 }

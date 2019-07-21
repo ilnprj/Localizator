@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
+using LocalizatorSystem;
 /// <summary>
 /// Swtich Language in Runtime with UI.Dropdown
 /// This is example script and does not cover a variety of test cases.

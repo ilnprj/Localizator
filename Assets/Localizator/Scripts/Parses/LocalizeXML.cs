@@ -4,81 +4,85 @@ using UnityEngine;
 using System;
 using System.IO;
 
-/// <summary>
-/// XML parser that takes the necessary parameters from the localization files
-/// </summary>
-public class LocalizeXML : IParseableLocalize
+namespace LocalizatorSystem
 {
-    private const string PATH = "LocXML";
-    public Dictionary<string, string> ParsedLocalization { get; set;}
-
-    public void InitParseModule(string currentLanguage)
-    {
-        LoadXmlFromFile(currentLanguage);
-    }
-
     /// <summary>
-    /// Returns Dictionary with key/value of localization from XML file
+    /// XML parser that takes the necessary parameters from the localization files
     /// </summary>
-    /// <returns></returns>
-    public Dictionary<string, string> GetParsedLocalization()
+    public class LocalizeXML : IParseableLocalize
     {
-        return ParsedLocalization;
-    }
+        private const string PATH = "LocXML";
+        public Dictionary<string, string> ParsedLocalization { get; set; }
 
-    private void LoadXmlFromFile(string lang)
-    {
-        try
+        public void InitParseModule(string currentLanguage)
         {
-            ParsedLocalization = new Dictionary<string, string>();
-            TextAsset textFromFile = Resources.Load<TextAsset>(PATH);
-            ParseXml(textFromFile.text, lang);
+            LoadXmlFromFile(currentLanguage);
         }
-        catch (Exception e)
-        {
-            Debug.Log("Failed to load XML file " + PATH + ".xml Please check file!" + e.StackTrace);
-        }
-    }
 
-    private void ParseXml(string inputText, string lang)
-    {
-        string keyLocalize;
-        string valueLocalized = " ";
-        XmlDocument xmlDoc = new XmlDocument();
-        xmlDoc.Load(new StringReader(inputText));
-        XmlNodeList ListTexts = xmlDoc.GetElementsByTagName("Line");
-        try
+        /// <summary>
+        /// Returns Dictionary with key/value of localization from XML file
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string, string> GetParsedLocalization()
         {
-            foreach (XmlNode item in ListTexts)
+            return ParsedLocalization;
+        }
+
+        private void LoadXmlFromFile(string lang)
+        {
+            try
             {
-                //Add Key for Localize
-                keyLocalize = item.Attributes[0].InnerText;
-                string guaranteedValue = item.ChildNodes[0].InnerText;
-                string prevLocValue = valueLocalized;
-
-                foreach (XmlNode subItem in item.ChildNodes)
-                {
-                    if (subItem.LocalName == lang)
-                    {
-                        //Add Value current Key for Localize
-                        valueLocalized = subItem.InnerText;
-                    }
-                }
-
-                if (valueLocalized != prevLocValue)
-                {
-                    ParsedLocalization.Add(keyLocalize, valueLocalized);
-                }
-                else
-                {
-                    ParsedLocalization.Add(keyLocalize, guaranteedValue);
-                }
+                ParsedLocalization = new Dictionary<string, string>();
+                TextAsset textFromFile = Resources.Load<TextAsset>(PATH);
+                ParseXml(textFromFile.text, lang);
+            }
+            catch (Exception e)
+            {
+                Debug.Log("Failed to load XML file " + PATH + ".xml Please check file!" + e.StackTrace);
             }
         }
-        catch (Exception e)
+
+        private void ParseXml(string inputText, string lang)
         {
-            Debug.LogError("Incorrect format XML Localization. Maybe missing key or value.");
-            Debug.LogError(e.Message);
+            string keyLocalize;
+            string valueLocalized = " ";
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(new StringReader(inputText));
+            XmlNodeList ListTexts = xmlDoc.GetElementsByTagName("Line");
+            try
+            {
+                foreach (XmlNode item in ListTexts)
+                {
+                    //Add Key for Localize
+                    keyLocalize = item.Attributes[0].InnerText;
+                    string guaranteedValue = item.ChildNodes[0].InnerText;
+                    string prevLocValue = valueLocalized;
+
+                    foreach (XmlNode subItem in item.ChildNodes)
+                    {
+                        if (subItem.LocalName == lang)
+                        {
+                            //Add Value current Key for Localize
+                            valueLocalized = subItem.InnerText;
+                        }
+                    }
+
+                    if (valueLocalized != prevLocValue)
+                    {
+                        ParsedLocalization.Add(keyLocalize, valueLocalized);
+                    }
+                    else
+                    {
+                        ParsedLocalization.Add(keyLocalize, guaranteedValue);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Incorrect format XML Localization. Maybe missing key or value.");
+                Debug.LogError(e.Message);
+            }
         }
     }
+
 }
