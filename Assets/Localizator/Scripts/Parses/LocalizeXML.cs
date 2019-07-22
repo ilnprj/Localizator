@@ -17,7 +17,8 @@
 
         public void InitParseModule(string currentLanguage)
         {
-            LoadXmlFromFile(currentLanguage);
+            TextAsset textFromFile = TextAssetFromFile.GetTextAsset(PATH);
+            ParseXml(textFromFile.text,currentLanguage);
         }
 
         /// <summary>
@@ -27,20 +28,6 @@
         public Dictionary<string, string> GetParsedLocalization()
         {
             return ParsedLocalization;
-        }
-
-        private void LoadXmlFromFile(string lang)
-        {
-            try
-            {
-                ParsedLocalization = new Dictionary<string, string>();
-                TextAsset textFromFile = Resources.Load<TextAsset>(PATH);
-                ParseXml(textFromFile.text, lang);
-            }
-            catch (Exception e)
-            {
-                Debug.Log("Failed to load XML file " + PATH + ".xml Please check file!" + e.StackTrace);
-            }
         }
 
         private void ParseXml(string inputText, string lang)

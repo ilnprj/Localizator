@@ -2,7 +2,7 @@
 {
     using UnityEngine;
     using System;
-    
+
     /// <summary>
     /// This script switch type parsing in Localizator.
     /// If this script not set in scene - Localizator set default type Parse automatically.
@@ -11,7 +11,7 @@
     {
         public enum TypeParser
         {
-            XML, JSON
+            XML, JSON, CSV
         }
 
         public TypeParser Parser = TypeParser.XML;
@@ -33,6 +33,11 @@
                 case TypeParser.XML:
                     {
                         Localizator.CurrentTypeParse = new LocalizeXML();
+                        break;
+                    }
+                case TypeParser.CSV:
+                    {
+                        Localizator.CurrentTypeParse = new LocalizeCSV();
                         break;
                     }
             }
