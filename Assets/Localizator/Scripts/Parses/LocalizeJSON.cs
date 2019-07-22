@@ -23,17 +23,7 @@
         {
             ParsedLocalization = new Dictionary<string, string>();
             AvailableLanguages = new List<string>();
-            TextAsset data;
-
-            try
-            {
-                data = Resources.Load<TextAsset>(PATH);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError("File " + PATH + ".json is not found in folder Resources!\n"+e.Message);
-                return;
-            }
+            TextAsset data = TextAssetFromFile.GetTextAsset(PATH);
 
             var jSON = JSON.Parse(data.text);
             var langs  = jSON["Languages"];
