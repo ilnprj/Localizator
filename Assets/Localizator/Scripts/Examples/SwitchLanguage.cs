@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/// ----------------------------------------------------------------------------
+// The MIT License
+// UserInterfaceSystem https://gitlab.com/ilnprj/
+// Copyright (c) 2019 ilnprj <Grigoriy Fedorenko>
+// ----------------------------------------------------------------------------
+
+using UnityEngine;
 using UnityEngine.UI;
 using LocalizatorSystem;
 using System.Collections.Generic;
