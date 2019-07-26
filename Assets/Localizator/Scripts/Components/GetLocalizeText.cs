@@ -1,8 +1,13 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-
+﻿/// ----------------------------------------------------------------------------
+// The MIT License
+// UserInterfaceSystem https://gitlab.com/ilnprj/
+// Copyright (c) 2019 ilnprj <Grigoriy Fedorenko>
+// ----------------------------------------------------------------------------
 namespace LocalizatorSystem
 {
+    using UnityEngine;
+    using UnityEngine.UI;
+
     /// <summary>
     /// Component for text. Send key to Localizator and get localized value.
     /// </summary>
