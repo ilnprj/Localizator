@@ -1,5 +1,5 @@
 ## Localizator
-**Simple Localizator** for Unity3D (works with XML, JSON and CSV files)
+**Simple Localizator** for Unity (works with XML, JSON and CSV files)
 - [Current Version 1.3.0 (.unitypackage)](https://gitlab.com/ilnprj/localizator/blob/release/Localizator_v1.3.0.unitypackage)
 
 #### Features:
