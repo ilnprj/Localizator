@@ -47,8 +47,8 @@ namespace LocalizatorSystem
                         break;
                     }
             }
-            Action<bool> onInit = delegate { };
-            Localizator.Init(onInit);
+           // Action<bool> onInit = delegate { };
+            //Localizator.Init(onInit);
         }
     }
 

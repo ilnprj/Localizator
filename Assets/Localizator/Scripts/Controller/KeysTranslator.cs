@@ -9,51 +9,68 @@ public class KeysTranslator
     private const char openKey = '[';
     private const char closeKey = ']';
 
-    private List<int> markersOpen;
-    private List<int> markersClose;
+    private string sourceText;
+    List<string> resultKeys = new List<string>();
 
-    public List<string> GetAllKeys(string text)
+    /// <summary>
+    /// Find keys in all text
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
+    public List<string> FindKeysInText(string text)
     {
-        List<string> resultKeys = new List<string>();
-        
+        sourceText = text;
         bool isKey = false;
         string curKey = string.Empty;
 
-        for (int i=0;i<text.Length;i++)
-        {   
-            if (text[i]==openKey && !isKey)
+        for (int i = 0; i < sourceText.Length; i++)
+        {
+            if (text[i] == openKey && !isKey)
             {
                 isKey = true;
-                markersOpen.Add(i);
                 continue;
             }
 
-            if (text[i]==closeKey && isKey)
+            if (text[i] == closeKey && isKey)
             {
                 isKey = false;
                 resultKeys.Add(curKey);
-                markersClose.Add(i);
                 curKey = string.Empty;
             }
 
             if (isKey)
             {
-                curKey+=text[i];
+                curKey += text[i];
             }
         }
-        
-        foreach (var item in resultKeys)
-        {
-            Debug.Log("KEY = "+item);
-        }
-
         return resultKeys;
     }
 
+
+    /// <summary>
+    /// Get Final Localization with any non-localize text and symbols
+    /// </summary>
+    /// <param name="LocalizedText"></param>
+    /// <returns></returns>
     public string GetFinalLocalize(List<string> LocalizedText)
     {
-        //TODO: Доделать возврат 
-        return LocalizedText[0];
-    }
+        string resultText = sourceText;
+        resultText = resultText.Replace(openKey.ToString(), "");
+        resultText = resultText.Replace(closeKey.ToString(), "");
 
+        int index = 0;
+        if (resultKeys.Count == LocalizedText.Count)
+        {
+            foreach (var item in resultKeys)
+            {
+                resultText = resultText.Replace(item, LocalizedText[index]);
+                index++;
+            }
+        }
+        else
+        {
+            Debug.LogError("String for localize and localized string is not equal! Check file localizator!");
+        }
+        return resultText;
+    }
 }
