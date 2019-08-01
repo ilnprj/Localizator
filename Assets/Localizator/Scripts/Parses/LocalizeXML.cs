@@ -67,8 +67,9 @@ namespace LocalizatorSystem
         private void SetLocalization(XmlDocument xml, string lang)
         {
             XmlNodeList listTexts = xml.GetElementsByTagName("Line");
-            string keyLocalize;
-            string valueLocalized = " ";
+            ParsedLocalization = new Dictionary<string, string>();
+            string keyLocalize = string.Empty;
+            string valueLocalized = string.Empty;
             try
             {
                 foreach (XmlNode item in listTexts)

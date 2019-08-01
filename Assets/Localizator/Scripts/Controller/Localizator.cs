@@ -21,10 +21,10 @@ namespace LocalizatorSystem
         public static Action LocalizeHandler = delegate { };
         public static Dictionary<string, string> LocalizationKeys = new Dictionary<string, string>();
         public static List<string> AvailableLanguages = new List<string>();
-        public static IParseableLocalize CurrentTypeParse = new LocalizeJSON();
+        public static IParseableLocalize CurrentTypeParse = new LocalizeXML();
         public static ILocale Locale = new LocaleLanguage();
         private static IParseableLocalize parseableLocalize;
-        
+
         public static void Init(Action<bool> onInited)
         {
             parseableLocalize = CurrentTypeParse;
@@ -44,15 +44,16 @@ namespace LocalizatorSystem
             }
         }
 
-        private static void TryLocalize(string key, Action<string> onLocalize)
+        private static string TryLocalize(string key)
         {
             if (LocalizationKeys.ContainsKey(key))
             {
-                onLocalize.Invoke(LocalizationKeys[key]);
+                return LocalizationKeys[key];
             }
             else
             {
                 Debug.LogError("Key " + key + " is not found in Dictionary.");
+                return string.Empty;
             }
         }
 
@@ -65,7 +66,7 @@ namespace LocalizatorSystem
         {
             if (Inited)
             {
-                TryLocalize(key, onLocalize);
+                onLocalize.Invoke(GetLocalizeText(key));
             }
             else
             {
@@ -73,7 +74,7 @@ namespace LocalizatorSystem
                 {
                     if (Inited)
                     {
-                        TryLocalize(key, onLocalize);
+                        onLocalize.Invoke(GetLocalizeText(key));
                     }
                     else
                     {
@@ -81,6 +82,23 @@ namespace LocalizatorSystem
                     }
                 });
             }
+        }
+
+        private static string GetLocalizeText(string key)
+        {
+            KeysTranslator translator = new KeysTranslator();
+            List<string> resultKeys = translator.FindKeysInText(key);
+            List<string> localizeKeys = new List<string>();
+            foreach (var item in resultKeys)
+            {
+                string result = TryLocalize(item);
+                if (!string.IsNullOrEmpty(result))
+                {
+                    localizeKeys.Add(result);
+                }
+            }
+
+           return translator.GetFinalLocalize(localizeKeys);
         }
 
         /// <summary>
