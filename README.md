@@ -1,6 +1,6 @@
 ## Localizator
 **Simple Localizator** for Unity (works with XML, JSON and CSV files)
-- [Current Version 1.3.0 (.unitypackage)](https://gitlab.com/ilnprj/localizator/blob/release/Localizator_v1.3.0.unitypackage)
+- [Current Version 1.3.0 (.unitypackage)](https://github.com/ilnprj/Localizator/blob/release/Localizator_v1.3.0.unitypackage)
 
 #### Features:
 - Can translate one key or several in one component.
@@ -32,9 +32,9 @@
 
 
 #### Type of Localization files:
-- [Example JSON file](https://gitlab.com/ilnprj/localizator/blob/develop/Assets/Resources/LocJSON.json)
-- [Example XML file](https://gitlab.com/ilnprj/localizator/blob/develop/Assets/Resources/LocXML.xml)
-- [Example XML file](https://gitlab.com/ilnprj/localizator/blob/develop/Assets/Resources/LocCSV.xml)
+- [Example JSON file](https://github.com/ilnprj/Localizator/blob/master/Assets/Resources/LocJSON.json)
+- [Example XML file](https://github.com/ilnprj/Localizator/blob/master/Assets/Resources/LocXML.xml)
+- [Example CSV file](https://github.com/ilnprj/Localizator/blob/master/Assets/Resources/LocCSV.csv)
 
 #### How to get started?
 1.  Set Localization file with all keys and values and put it to Resources folder on your Unity project. (XML or JSON or CSV)
